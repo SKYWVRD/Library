@@ -33,12 +33,12 @@ function updateTable(){
         pagesCell.innerHTML = myLibrary[book].pages;
         
         let deleteButton = document.createElement("button");
-        deleteButton.setAttribute('book-index', book);
+        //deleteButton.setAttribute('book-index', book);
         deleteButton.innerHTML = "x";
         
         deleteButton.addEventListener('click', function() {
             //table.deleteRow(deleteButton.dataset.index);
-            deleteBook(deleteButton.dataset.index)
+            deleteBook(Number(book))
             updateTable();
         });
 
@@ -53,14 +53,14 @@ function updateTable(){
 }
 
 function deleteBook(bookIndex){
-    if(bookIndex == 0){
+    if(bookIndex === 0){
         myLibrary.shift();
-    } else if (bookIndex == myLibrary.length-1){
-        myLibrary.pop();
     } else {
         let firstHalf = myLibrary.slice(0, bookIndex-1);
-        let secondHalf = myLibrary.slice(bookIndex+1);
+        let secondHalf = myLibrary.slice(bookIndex);
         myLibrary = firstHalf.concat(secondHalf);
+        console.log(firstHalf);
+        console.log(secondHalf);
     }
 }
 
