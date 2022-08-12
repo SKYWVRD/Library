@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#books, th, td, tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#add-book {
+    margin: 10px;
+}
+
+td, th {
+    width: 150px;
+    padding: 5px;
+    text-align: center;
+}
