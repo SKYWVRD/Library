@@ -1,13 +1,21 @@
 let table = document.getElementById("books")
 let addButton = document.getElementById("add-book")
-
 let myLibrary = [];
-
 
 function Book(title, author, pages){
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = false;
+
+
+}
+
+Book.prototype.readStatus = function () {
+    if(this.read === false)
+        this.read = true;
+    else
+        this.read = false;
 }
 
 function addBookToLibrary (title, author, pages){
@@ -27,14 +35,19 @@ function updateTable(){
         let titleCell = newRow.insertCell(0);
         let authorCell = newRow.insertCell(1);
         let pagesCell = newRow.insertCell(2);
-        let deleteCell = newRow.insertCell(3);
+        let readCell = newRow.insertCell(3);
+        let settingsCell = newRow.insertCell(4);
         titleCell.innerHTML = myLibrary[book].title;
         authorCell.innerHTML = myLibrary[book].author;
         pagesCell.innerHTML = myLibrary[book].pages;
+        readCell.innerHTML = myLibrary[book].read;
         
         let deleteButton = document.createElement("button");
+        let readButton = document.createElement("button");
+
         //deleteButton.setAttribute('book-index', book);
         deleteButton.innerHTML = "x";
+        readButton.innerHTML = "read / unread"
         
         deleteButton.addEventListener('click', function() {
             //table.deleteRow(deleteButton.dataset.index);
@@ -42,14 +55,17 @@ function updateTable(){
             updateTable();
         });
 
-        deleteCell.appendChild(deleteButton);
+        readButton.addEventListener('click', function () {
+            switchReadStatus(Number(book));
+            updateTable()
+        });
+
+        settingsCell.appendChild(deleteButton);
+        settingsCell.appendChild(readButton);
 
 
     }
 
-    
-
-    
 }
 
 function deleteBook(bookIndex){
@@ -62,6 +78,10 @@ function deleteBook(bookIndex){
         console.log(firstHalf);
         console.log(secondHalf);
     }
+}
+
+function switchReadStatus(bookIndex){
+    myLibrary[bookIndex].readStatus();
 }
 
 function clearTable(){
