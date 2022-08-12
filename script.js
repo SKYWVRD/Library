@@ -1,4 +1,5 @@
 let table = document.getElementById("books")
+let addButton = document.getElementById("add-book")
 
 let myLibrary = [];
 
@@ -12,11 +13,11 @@ function Book(title, author, pages){
 function addBookToLibrary (title, author, pages){
     let newBook = new Book(title, author, pages);
     myLibrary.push(newBook);
-    generateTable();
+    updateTable();
     return 0;
 }
 
-function generateTable(){
+function updateTable(){
 
     let libraryLength = myLibrary.length;
     let currentIndex = libraryLength-1;
@@ -35,3 +36,13 @@ function generateTable(){
     cell2.innerHTML = myLibrary[currentIndex].author;
     cell3.innerHTML = myLibrary[currentIndex].pages;
 }
+
+addButton.addEventListener('click', function() {
+    let title = prompt("Enter Book Name");
+    let author = prompt("Enter Author Name");
+    let pages = prompt("Enter number of pages");
+
+    addBookToLibrary(title, author, pages);
+
+})
+
