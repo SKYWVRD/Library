@@ -2,14 +2,20 @@ let table = document.getElementById("books")
 let addButton = document.getElementById("add-book")
 let myLibrary = [];
 
-function Book(title, author, pages){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = false;
 
+class Book{
+    constructor(title, author, pages){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = false;
+    }
 
+    readStatus() {
+        this.read = this.read === false ? true : false;
+    }
 }
+
 
 Book.prototype.readStatus = function () {
     if(this.read === false)
